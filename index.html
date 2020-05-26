@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="demo">
+       
+            <div class="title">
+                <input type="checkbox" v-model="allSelected">
+                <span>Zara</span>
+            </div>
+            <ul>
+                <li v-for="(item,index) in buyList" :key="item.id">
+                    <input type="checkbox" v-model="item.checked">
+                    <img :src="item.poster" alt="">
+                    <div class="des">
+                        <span>{{item.title}}</span>
+                        <div class="jiage">
+                            <div class="price">￥{{item.price}}</div>
+                            <div class="num">
+                                <button
+                                    @click="changeNum(index,'-')"
+                                >-</button>
+                                <input type="text" v-model.number="item.cart" >
+                                <button
+                                    @click="changeNum(index,'+')"
+                                >+</button>
+                            </div>
+                        </div>                    
+                    </div>
+                </li>
+            </ul>
+        
+        <div class="controlBuy">
+            <div class="select">
+                <input type="checkbox"
+                    v-model="allSelected"
+                >
+                <span>全选</span>
+            </div>
+            <div class="toBuy">
+                <span>合计：</span>
+                <div class="price">{{totalPrice}}</div>
+                <button >结算({{checkedArr.length}})</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el:".demo",
+            data:{
+                buyList: [
+                {
+                    poster: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4005587090,2408158268&fm=26&gp=0.jpg',
+                    title: '2020流行套装',
+                    price: 1299,
+                    cart: 1,
+                    id: 0
+                },
+                {
+                    poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571915784984&di=a0056fd06188e87b922c60878e5ce6e2&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F03%2F79%2F64%2F5c05df1faf3b7_610.jpg',
+                    title: '方领 T恤',
+                    price: 114,
+                    cart: 1,
+                    id: 1595402664708
+                },
+                {
+                    poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571915762633&di=49517ca62ecddb638cdfb2158a64e39a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201702%2F05%2F20170205222154_WLdJS.jpeg', 
+                    title: '秒杀 牛仔裤',
+                    price: 10,
+                    cart: 1,
+                    id: 1596305473062
+                },
+                {
+                    poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571915748758&di=5be825da4d37bcc21959946c101d5609&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F19%2F20170719211350_4PnBt.jpeg',
+                    title: '碎花连衣裙',
+                    price: 120,
+                    cart: 1,
+                    id: 1595413512182
+                },
+                {
+                    poster: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571915762633&di=49517ca62ecddb638cdfb2158a64e39a&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201702%2F05%2F20170205222154_WLdJS.jpeg',
+                    title: '老爹鞋 2020',
+                    price: 127,
+                    cart: 1,
+                    id: 1596302161181
+                },
+                {
+                    poster: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4005587090,2408158268&fm=26&gp=0.jpg',
+                    title: '太阳帽 遮阳帽 黑色',
+                    price: 1,
+                    cart: 1,
+                    id: 1596300025301,
+                },
+                ]
+            },
+            methods:{
+                changeNum(index,flag){
+                    if(flag==="-"){
+                        if(this.buyList[index].cart===1){
+                            return;
+                        }
+                        this.buyList[index].cart--;
+                    }else{
+                        this.buyList[index].cart++;
+                    }
+                    
+                }
+            },
+            computed:{
+                checkedArr(){
+                   return this.buyList.filter(item => item.checked);
+                },
+                totalPrice(){
+                    let price=0;
+                    this.checkedArr.forEach(item=>{
+                        price += item.price*item.cart;
+                    })
+                    return price;
+                },
+                allSelected:{
+                    get(){
+                        return this.buyList.every(item=>item.checked);
+                    },
+                    set(val){
+                        if(!val){
+                            this.buyList.forEach(item=>vm.$set(item,"checked",false));
+                        }else{
+                            this.buyList.forEach(item=>vm.$set(item,"checked",true));
+                        }
+                    }
+                }
+            }
+        });
+        vm.buyList.forEach(item => {
+            vm.$set(item,"checked",false)
+        });
+    </script>
+</body>
+</html>

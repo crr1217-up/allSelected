@@ -1,0 +1,81 @@
+*{
+    margin:0;
+    padding:0;
+}
+ul{
+    list-style: none;
+}
+.demo{
+    margin:0 auto;
+    width:500px;
+    border-radius: 5px;
+    border:1px solid #ccc;
+    padding:15px;
+}
+.title span{
+    font-size: 24px;
+    font-weight: bold;
+    margin-left:10px;
+}
+
+li{
+    display: flex;
+    align-items: center;
+    margin:10px 0;
+}
+li img{
+    width:100px;
+    /* border:1px solid; */
+    margin: 10px;
+}
+.des{
+    flex:1 1 auto;
+}
+.jiage{
+    display:flex;
+    justify-content: space-between;
+    margin-top:15px;
+}
+.price{
+    color:#f40;
+    font-weight: bold;
+    font-size: 20px;
+}
+.num{
+    display: flex;
+    justify-content: center;
+}
+.num input{
+    width:30px;
+    text-align: center;
+    border: 1px solid #eee;
+    outline: none;
+}
+.num button{
+    padding:0 5px;
+    outline:none;
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+.controlBuy{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    border-top:1px solid #ccc;
+    padding:20px 0;
+}
+.controlBuy .toBuy{
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+}
+.controlBuy .toBuy button{
+    padding:5px 10px;
+    background-color: #f40;
+    color:#fff;
+    font-weight: bold;
+    outline: none;
+    border:none;
+    border-radius: 8px;
+    margin-left:10px;
+}
